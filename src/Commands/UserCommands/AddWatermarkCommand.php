@@ -2,7 +2,7 @@
 
 namespace Webmasterskaya\TelegramBotCommands\Commands\UserCommands;
 
-use Ajaxray\PHPWatermark\Watermark;
+use Intervention\Image\ImageManagerStatic as Image;
 use Longman\TelegramBot\Commands as BotCommands;
 use Longman\TelegramBot\Entities\File;
 use Longman\TelegramBot\Entities\PhotoSize;
@@ -79,10 +79,14 @@ class AddWatermarkCommand extends BotCommands\UserCommand
 							$file_path      = realpath($download_path . '/' . $tg_file_path);
 							$watermark_path = realpath($this->config['watermark_path']);
 
-							$watermark = new Watermark($file_path);
-							$watermark->setPosition(Watermark::POSITION_CENTER)
-								->setStyle(Watermark::STYLE_IMG_DISSOLVE);
-							$watermark->withImage($watermark_path);
+							$src = Image::make($file_path);
+							$watermark = Image::make($watermark_path);
+
+							$watermark->resize($src->width() - 20, $src->height() - 20);
+
+							$src->insert($watermark, 'center');
+
+							$src->save();
 
 							$data = [
 								'chat_id'             => $message->getChat()->getId(),

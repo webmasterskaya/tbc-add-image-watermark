@@ -4,60 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9da8a8febc630aa5e79c732afd652b6f",
+    "content-hash": "49fc3bae2cbb1776410704ead76015c1",
     "packages": [
-        {
-            "name": "ajaxray/php-watermark",
-            "version": "v0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ajaxray/php-watermark.git",
-                "reference": "42e93d87fde4c534b574d5d9ab4ba472b1798d9f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ajaxray/php-watermark/zipball/42e93d87fde4c534b574d5d9ab4ba472b1798d9f",
-                "reference": "42e93d87fde4c534b574d5d9ab4ba472b1798d9f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6 <8"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7 || ^6.5",
-                "satooshi/php-coveralls": "v2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ajaxray\\PHPWatermark\\": "src/Ajaxray/PHPWatermark/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anis Uddin Ahmad",
-                    "email": "anis.programmer@gmail.com"
-                }
-            ],
-            "description": "Add text or image watermark on images.",
-            "homepage": "http://github.com/ajaxray/php-watermark",
-            "keywords": [
-                "image",
-                "image-manipulation",
-                "imagemagick-watermark",
-                "imagemagick-wrapper",
-                "watermark"
-            ],
-            "support": {
-                "issues": "https://github.com/ajaxray/php-watermark/issues",
-                "source": "https://github.com/ajaxray/php-watermark/tree/v0.1.2"
-            },
-            "time": "2021-09-15T18:25:27+00:00"
-        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "7.5.0",
@@ -390,6 +338,90 @@
             "time": "2022-10-26T14:07:24+00:00"
         },
         {
+            "name": "intervention/image",
+            "version": "2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/04be355f8d6734c826045d02a1079ad658322dad",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/2.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
             "name": "longman/telegram-bot",
             "version": "0.79.0",
             "source": {
@@ -489,47 +521,6 @@
                 }
             ],
             "time": "2022-09-04T13:22:41+00:00"
-        },
-        {
-            "name": "lucadevelop/telegram-entities-decoder",
-            "version": "v1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LucaDevelop/telegram-entities-decoder.git",
-                "reference": "7cebf5d19b68a2e4f3298afd627daad1104f1acb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LucaDevelop/telegram-entities-decoder/zipball/7cebf5d19b68a2e4f3298afd627daad1104f1acb",
-                "reference": "7cebf5d19b68a2e4f3298afd627daad1104f1acb",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=7.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "lucadevelop\\TelegramEntitiesDecoder\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "LucaDevelop",
-                    "email": "lsirri.gm@gmail.com"
-                }
-            ],
-            "description": "Telegram entities decoder in PHP",
-            "support": {
-                "issues": "https://github.com/LucaDevelop/telegram-entities-decoder/issues",
-                "source": "https://github.com/LucaDevelop/telegram-entities-decoder/tree/v1.2.1"
-            },
-            "time": "2022-01-24T11:23:32+00:00"
         },
         {
             "name": "psr/http-client",

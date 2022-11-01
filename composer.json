@@ -7,7 +7,6 @@
     },
     "require": {
         "longman/telegram-bot": "^0.79.0",
-        "ajaxray/php-watermark": "v0.1.2",
-        "lucadevelop/telegram-entities-decoder": "^1.2"
+        "intervention/image": "^2.7"
     }
 }
