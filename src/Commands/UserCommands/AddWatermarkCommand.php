@@ -5,6 +5,7 @@ namespace Webmasterskaya\TelegramBotCommands\Commands\UserCommands;
 use Intervention\Image\ImageManagerStatic as Image;
 use Longman\TelegramBot\Commands as BotCommands;
 use Longman\TelegramBot\Entities\File;
+use Longman\TelegramBot\Entities\InlineKeyboard;
 use Longman\TelegramBot\Entities\PhotoSize;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
@@ -79,8 +80,26 @@ class AddWatermarkCommand extends BotCommands\UserCommand
 							$file_path      = realpath($download_path . '/' . $tg_file_path);
 							$watermark_path = realpath($this->config['watermark_path']);
 
-							$src       = Image::make($file_path);
-							$watermark = Image::make($watermark_path);
+							$src       = Image::configure(['driver' => 'Imagick'])->make($file_path);
+							$watermark = Image::configure(['driver' => 'Imagick'])->make($watermark_path);
+
+//							$color_picker = Image::make($file_path);
+//							$color_picker->resize(1, 1);
+//							$base_color = $color_picker->pickColor(0, 0);
+//							$contrast   = (($base_color[0] * 299) + ($base_color[1] * 587) + ($base_color[2] * 114)) / 1000;
+//
+//							if ($contrast <= 128)
+//							{
+//								$diff = round($contrast * 50 / 128);
+//							}
+//							else
+//							{
+//								$diff = round(($contrast - 128) * 50 / 128);
+//							}
+
+							$opacity = 25;
+
+//							$this->replyToUser('rgba(' . implode(',', $base_color) . '), Контраст: ' . $contrast . ' Diff: ' . $diff);
 
 							$a     = $src->width(); // Ширина картинки
 							$b     = $src->height(); // Высота картинки
@@ -99,6 +118,8 @@ class AddWatermarkCommand extends BotCommands\UserCommand
 
 							$watermark->rotate($angle);
 
+							$watermark->opacity($opacity);
+
 							$src->insert($watermark, 'center');
 
 							$src->save();
@@ -108,7 +129,23 @@ class AddWatermarkCommand extends BotCommands\UserCommand
 								'photo'               => Request::encodeFile($file_path),
 								'caption'             => $message->getCaption(),
 								'caption_entities'    => $message->getCaptionEntities(),
-								'reply_to_message_id' => $message->getMessageId()
+								'reply_to_message_id' => $message->getMessageId(),
+								'reply_markup'        => new InlineKeyboard(
+									[
+										[
+											'text'          => '-',
+											'callback_data' => 'addwatermark_callbackquery_opacity_' . ($opacity - 5)
+										],
+										[
+											'text'          => 'Прозрачность: ' . $opacity,
+											'callback_data' => 'do_nothing'
+										],
+										[
+											'text'          => '+',
+											'callback_data' => 'addwatermark_callbackquery_opacity_' . ($opacity + 5)
+										],
+									]
+								)
 							];
 
 							$send_photo_request = Request::sendPhoto($data);
