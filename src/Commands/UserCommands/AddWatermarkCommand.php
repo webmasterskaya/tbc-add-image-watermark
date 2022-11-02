@@ -79,10 +79,25 @@ class AddWatermarkCommand extends BotCommands\UserCommand
 							$file_path      = realpath($download_path . '/' . $tg_file_path);
 							$watermark_path = realpath($this->config['watermark_path']);
 
-							$src = Image::make($file_path);
+							$src       = Image::make($file_path);
 							$watermark = Image::make($watermark_path);
 
-							$watermark->resize($src->width() - 20, $src->height() - 20);
+							$a     = $src->width(); // Ширина картинки
+							$b     = $src->height(); // Высота картинки
+							$x     = $watermark->width(); // Исходная ширина вотермарки
+							$y     = $watermark->height(); // Исходная высота вотермарки
+							$tan   = $b / $a;
+							$angle = rad2deg(atan($tan)); // Угол наклона вотермарки относительно горизонтальной оси в градусах
+
+							$c = $b / (sin(deg2rad($angle)) + (cos(deg2rad($angle)) * $y / $x)); // Новая ширина вотермарки
+							$d = $c * $y / $x; // Новая высота вотермарки
+
+							$watermark->resize($c, $d, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+
+							$watermark->rotate($angle);
 
 							$src->insert($watermark, 'center');
 
